@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-4">
+    <img
+      class="img-fluid"
+      src="assets/svg/secure_login.svg"
+      alt="Login image"
+    />
+  </div>
+
+  <div class="col-4 offset-1">
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+      <div class="mt-3">
+        <label for="username">Username</label>
+        <input
+          formControlName="username"
+          class="form-control"
+          type="text"
+          id="username"
+          required
+          placeholder="Username"
+        />
+
+        <div
+          *ngIf="username.invalid && (username.dirty || username.touched)"
+          class="mt-2 text-danger"
+        >
+          <div *ngIf="username.errors?.['required']">Username is required.</div>
+
+          <div *ngIf="username.errors?.['minlength']">
+            Username minimum length is 5.
+          </div>
+
+          <div *ngIf="username.errors?.['maxlength']">
+            Username maximum length is 20.
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <label for="password">Password</label>
+        <input
+          formControlName="password"
+          class="form-control"
+          type="password"
+          required
+          id="password"
+          placeholder="********"
+        />
+        <div *ngIf="getControl('password').invalid && (getControl('password').dirty || getControl('password').touched)"
+          class="mt-2 text-danger">
+          
+          <div *ngIf="getControl('password').errors?.['required']">
+            Password is required.
+          </div>
+
+          <div *ngIf="getControl('password').errors?.['minlength']">
+            Password minimum length is 8.
+          </div>
+
+          <div *ngIf="getControl('password').errors?.['maxlength']">
+            Password maximum length is 20.
+          </div>
+        </div>
+
+        <a href="#">Forgot password!</a>
+      </div>
+
+      <div class="form-check mt-3">
+        <input
+          formControlName="remember"
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="remember"
+        />
+        <label class="form-check-label" for="remember"> Remember me </label>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid" class="mt-3 btn btn-primary">Login</button>
+    </form>
+
+    <div class="mt-4">
+      <a class="btn btn-link" routerLink="/auth/signup">Create an account.</a>
+    </div>
+  </div>
+</div>
