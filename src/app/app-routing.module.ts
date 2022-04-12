@@ -25,6 +25,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule)
+      },
+      {
+        path: 'invoice',
+        loadChildren: () => import('./modules/invoice/invoice.module').then((m) => m.InvoiceModule)
       }
     ]
   },
