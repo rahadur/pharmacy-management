@@ -9,6 +9,11 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 export class PurchaseComponent implements OnInit {
 
   purchaseForm: FormGroup;
+  dataForm: FormGroup;
+
+  editItemIndex = null;
+
+  purchaseItems: any[] = []
 
   constructor(
     private fb: FormBuilder
@@ -16,6 +21,7 @@ export class PurchaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.initPurchaseForm();
+    this.initDataForm();
   }
 
 
@@ -42,8 +48,46 @@ export class PurchaseComponent implements OnInit {
     this.items.push(group);
   }
 
+
+  addPurchaseData(): void {
+    const value = this.dataForm.value
+    console.log(value);
+    if(this.editItemIndex == null) {
+      this.purchaseItems.push(value)
+      this.dataForm.reset();
+
+    } else {
+      this.purchaseItems[this.editItemIndex] = value;
+      this.dataForm.reset();
+      this.editItemIndex = null;
+    }
+    
+  }
+
+  editPurchaseItem(item, index): void {
+    this.dataForm.patchValue(item);
+    this.editItemIndex = index;
+  }
+
+  deletePurchaseItem(index): void {
+    this.purchaseItems.splice(index, 1);
+  }
+
   removePurchaseItem(index: number): void {
     this.items.removeAt(index)
+  }
+
+  private initDataForm(): void {
+    this.dataForm = this.fb.group({
+      category: [''],
+      medicine: [''],
+      unit: [''],
+      batchNO: [''],
+      quantity: [''],
+      amount: [''],
+      discount: [''],
+      total: ['']
+    })
   }
 
 

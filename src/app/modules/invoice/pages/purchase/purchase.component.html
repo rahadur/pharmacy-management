@@ -23,67 +23,95 @@
     </div>
   </div>
 
-  <div class="row mt-3">
-      <!-- Items Groups -->
+  <div class="row mt-3" >
+    <!-- Items Groups -->
+    <form [formGroup]="dataForm">
+      <div class="row">
+        <div class="col">
+          <label for="category" class="form-label">Category</label>
+          <input formControlName="category" type="text" class="form-control" />
+        </div>
 
-      <ng-container formArrayName="items">
-        <ng-container *ngFor="let itemGroup of items.controls; let indx = index; let fst = first; let lst = last">
+        <div class="col">
+          <label for="category" class="form-label">Medicine</label>
+          <input formControlName="medicine" type="text" class="form-control" />
+        </div>
 
-            <div class="row" [formGroup]="convertToGroup(itemGroup)">
-                <div class="col">
-                  <label for="category" class="form-label">Category</label>
-                  <input type="text" class="form-control" />
-                </div>
-          
-                <div class="col">
-                  <label for="category" class="form-label">Medicine</label>
-                  <input type="text" class="form-control" />
-                </div>
-          
-                <div class="col">
-                  <label for="category" class="form-label">Unit</label>
-                  <input type="text" class="form-control" />
-                </div>
-          
-                <div class="col">
-                  <label for="category" class="form-label">Batch No:</label>
-                  <input type="number" class="form-control" />
-                </div>
-          
-                <div class="col">
-                  <label for="category" class="form-label">Quantity</label>
-                  <input type="text" class="form-control" />
-                </div>
-          
-                <div class="col">
-                  <label for="category" class="form-label">Amount</label>
-                  <input type="text" class="form-control" />
-                </div>
-          
-                <div class="col">
-                  <label for="category" class="form-label">Discount</label>
-                  <input type="text" class="form-control" />
-                </div>
-          
-                <div class="col">
-                  <label for="category" class="form-label">Total</label>
-                  <input type="text" class="form-control" />
-                </div>
-          
-                <div class="col" >
-                  <button *ngIf="!lst" (click)="removePurchaseItem(indx)" class="btn btn-danger mt-4 me-2">
-                    -
-                  </button>
+        <div class="col">
+          <label for="category" class="form-label">Unit</label>
+          <input formControlName="unit" type="text" class="form-control" />
+        </div>
 
-                  <button *ngIf="lst" (click)="addPurchaseItem()" class="btn btn-primary mt-4">
-                    +
-                  </button>
-                </div>
-            </div>
-        </ng-container>
-      </ng-container>
+        <div class="col">
+          <label for="category" class="form-label">Batch No:</label>
+          <input formControlName="batchNO" type="number" class="form-control" />
+        </div>
 
-     <!-- Items Groups End -->
+        <div class="col">
+          <label for="category" class="form-label">Quantity</label>
+          <input formControlName="quantity" type="text" class="form-control" />
+        </div>
+
+        <div class="col">
+          <label for="category" class="form-label">Amount</label>
+          <input formControlName="amount" type="text" class="form-control" />
+        </div>
+
+        <div class="col">
+          <label for="category" class="form-label">Discount</label>
+          <input formControlName="discount" type="text" class="form-control" />
+        </div>
+
+        <div class="col">
+          <label for="category" class="form-label">Total</label>
+          <input formControlName="total" type="text" class="form-control" />
+        </div>
+
+        <div class="col">
+          <button (click)="addPurchaseData()" class="btn btn-primary mt-4">+</button>
+        </div>
+      </div>
+  </form>
+    <!-- Items Groups End -->
+
+    <!-- Data Table -->
+    <div class="row mt-3">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Medicine</th>
+            <th>Unit</th>
+            <th>Batch No</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+            <th>Discount</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of purchaseItems; let indx = index">
+            <td>{{ item.category }} </td>
+            <td>{{ item.medicine }} </td>
+            <td>{{ item.unit }} </td>
+            <td>{{ item.batchNO }} </td>
+            <td>{{ item.quantity }} </td>
+            <td>{{ item.amount }} </td>
+            <td>{{ item.discount }} </td>
+            <td>{{ item.total }} </td>
+            <td>
+              <button class="btn btn-sm btn-primary" 
+              (click)="editPurchaseItem(item, indx)">Edit</button>
+              <button class="btn btn-sm btn-danger" 
+              (click)="deletePurchaseItem(indx)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /Data Table -->
   </div>
 
   <div class="row my-4">
