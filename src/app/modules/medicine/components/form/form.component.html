@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Add New Medicine</h2>
+
+<div mat-dialog-content>
+
+  <form [formGroup]="medicineForm">
+    <div class="mt-3">
+      <label for="medicine-name" class="form-label">Medicine Name</label>
+      <input formControlName="medicineName" type="text" id="medicine-name" class="form-control" />
+    </div>
+
+    <div class="mt-3">
+      <label class="form-label">Generic Name</label>
+      <input formControlName="genericName" type="text" class="form-control" />
+    </div>
+
+  </form>
+
+</div>
+
+<div matDialogActions>
+  <button class="btn btn-primary" (click)="saveMedicine()">Save Medicine</button>
+</div>
