@@ -1,0 +1,74 @@
+<mat-stepper #stepper>
+  <mat-step
+    [stepControl]="personalFormGroup"
+    errorMessage="Please Complete form"
+    label="Personal Information"
+    labelPosition="bottom"
+  >
+    <!-- <ng-template matStepLabel>Personal Information</ng-template> -->
+    <form [formGroup]="personalFormGroup">
+      <div class="mt-3">
+        <label for="firstName" class="control-label">First Name</label>
+        <input
+          formControlName="firstName"
+          type="text"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="mt-3">
+        <label for="lastName" class="control-label">Last Name</label>
+        <input formControlName="lastName" type="text" class="form-control" />
+      </div>
+    </form>
+
+    <button class="btn btn-sm btn-primary mt-3" matStepperNext>Next</button>
+  </mat-step>
+
+  <mat-step [stepControl]="contactFormGroup" [editable]="false">
+    <ng-template matStepLabel>Contact Information</ng-template>
+
+    <app-contact-form [contactFormGroup]="contactFormGroup"></app-contact-form>
+
+    <button class="btn btn-sm btn-primary mt-3" matStepperPrevious>
+      Previous
+    </button>
+    <button class="btn btn-sm btn-primary mt-3 ms-3" matStepperNext>
+      Next
+    </button>
+  </mat-step>
+
+  <mat-step [stepControl]="loginFormGroup">
+    <ng-template matStepLabel>Login Information</ng-template>
+    <form [formGroup]="loginFormGroup">
+      <div class="mt-3">
+        <label for="username" class="control-label">Username</label>
+        <input formControlName="username" type="text" class="form-control" />
+      </div>
+
+      <div class="mt-3">
+        <label for="email" class="control-label">Email</label>
+        <input formControlName="email" type="text" class="form-control" />
+      </div>
+    </form>
+
+    <button class="btn btn-sm btn-primary mt-3" matStepperPrevious>
+      Previous
+    </button>
+    <button class="btn btn-sm btn-primary mt-3 ms-3" (click)="stepper.reset()">
+      Reset
+    </button>
+
+    <button
+      [disabled]="
+        personalFormGroup.invalid ||
+        contactFormGroup.invalid ||
+        loginFormGroup.invalid"
+      class="btn btn-sm btn-primary mt-3 ms-3"
+      (click)="saveForms()"
+    >
+      Save
+    </button>
+  </mat-step>
+</mat-stepper>
