@@ -18,8 +18,9 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.medicineForm = this.fb.group({
-      medicineName: ['', [Validators.required]],
-      genericName: ['', [Validators.required]],
+      medicine: ['', [Validators.required]],
+      generic: ['', [Validators.required]],
+      category: ['', [Validators.required]],
     });
 
     if (this.data) {
